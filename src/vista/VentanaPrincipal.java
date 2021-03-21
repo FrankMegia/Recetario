@@ -68,6 +68,8 @@ public class VentanaPrincipal extends JFrame{
 		
 		ta_prepa = new JTextArea();
 		JScrollPane scrollPane1 = new JScrollPane(ta_prepa);
+		ta_prepa.setLineWrap(true);
+		ta_prepa.setWrapStyleWord(true);
 		tabbedPane.addTab("Preparación", null, scrollPane1, null);
 		
 		btnOtraAcc = new JButton("Otra Acción");
@@ -127,6 +129,12 @@ public class VentanaPrincipal extends JFrame{
 		btnEnviar.setEnabled(false);
 		btnEnviar.addActionListener(new ControladorBtnEnviar(this));
 		contentPane.add(btnEnviar);
+		
+		btn_Imprimir = new JButton("Vista Previa");
+		btn_Imprimir.setBounds(660, 460, 109, 23);
+		btn_Imprimir.setEnabled(false);
+		btn_Imprimir.addActionListener(new ControladorBtnImprimir(this));
+		contentPane.add(btn_Imprimir);
 		
 		JLabel et_recetario = new JLabel("Recetario:");
 		et_recetario.setForeground(Color.WHITE);
@@ -244,9 +252,11 @@ public class VentanaPrincipal extends JFrame{
 		if(habilitarBotones) {
 			btnModif.setEnabled(true);
 			btnBorrar.setEnabled(true);
+			btn_Imprimir.setEnabled(true);
 		}else {
 			btnModif.setEnabled(false);
 			btnBorrar.setEnabled(false);
+			btn_Imprimir.setEnabled(false);
 		}
 		
 		
@@ -262,7 +272,7 @@ public class VentanaPrincipal extends JFrame{
 	private JLabel et_foto;
 	private JLabel ruta;
 	private JList<Receta> listaRecetas;
-	private JButton btnAdd, btnBorrar, btnModif, btnBuscar, btnEnviar, btnOtraAcc;
+	private JButton btnAdd, btnBorrar, btnModif, btnBuscar, btnEnviar, btnOtraAcc, btn_Imprimir;
 	private Receta receta;
 
 }
