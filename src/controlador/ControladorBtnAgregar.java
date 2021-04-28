@@ -19,7 +19,7 @@ public class ControladorBtnAgregar implements ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		
 		String nombre = ventana.getTf_receta().getText();
-		String categ = ventana.getTf_categ().getText();
+		String categ = ventana.getComboCat().getSelectedItem().toString();
 		String ingred = ventana.getTa_ingred().getText();
 		String prepa = ventana.getTa_prepa().getText();
 		String ruta = ventana.getRuta().getText();

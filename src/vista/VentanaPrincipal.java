@@ -5,8 +5,11 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Insets;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -53,10 +56,13 @@ public class VentanaPrincipal extends JFrame{
 		et_categ.setBounds(42, 102, 78, 19);
 		contentPane.add(et_categ);
 		
-		tf_categ = new JTextField();
+		/*tf_categ = new JTextField();
 		tf_categ.setBounds(121, 101, 249, 20);
 		contentPane.add(tf_categ);
-		tf_categ.setColumns(10);
+		tf_categ.setColumns(10);*/
+		comboCat = cargaCombo();
+		comboCat.setBounds(121, 101, 249, 20);
+		contentPane.add(comboCat);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(42, 174, 328, 218);
@@ -159,17 +165,43 @@ public class VentanaPrincipal extends JFrame{
 		contentPane.add(et_fondo);
 	}
 	
+	private JComboBox<String> cargaCombo() {
+		
+		ArrayList<String> lista = new ArrayList<String>();
+		
+		File f = new File("");
+		File config = new File(f.getAbsolutePath(), "Recetario.cfg");
+		int contador = 0;
+		boolean leerCats = false;
+		
+		try {
+			FileReader entrada = new FileReader(config);
+			BufferedReader buffer = new BufferedReader(entrada);
+			
+			String linea = buffer.readLine();
+			while(linea != null) {
+				if(leerCats) {
+					lista.add(linea.trim());
+				}
+				if(linea.startsWith("#")) contador++;
+				if(contador == 2) leerCats = true;
+				
+				linea = buffer.readLine();
+			}
+			
+			entrada.close();
+		} catch (IOException  e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+			e.printStackTrace();
+		} 
+		
+		JComboBox combo = new JComboBox(lista.toArray());
+		
+		return combo;
+	}
+
 	public JTextField getTf_receta() {
 		return tf_receta;
-	}
-	public void setTf_receta(JTextField tf_receta) {
-		this.tf_receta = tf_receta;
-	}
-	public JTextField getTf_categ() {
-		return tf_categ;
-	}
-	public void setTf_categ(JTextField tf_categ) {
-		this.tf_categ = tf_categ;
 	}
 
 	public JLabel getRuta() {
@@ -184,18 +216,10 @@ public class VentanaPrincipal extends JFrame{
 		return ta_ingred;
 	}
 
-	public void setTa_ingred(JTextArea ta_ingred) {
-		this.ta_ingred = ta_ingred;
-	}
-
 	public JTextArea getTa_prepa() {
 		return ta_prepa;
 	}
 
-	public void setTa_prepa(JTextArea ta_prepa) {
-		this.ta_prepa = ta_prepa;
-	}
-	
 	public JList<Receta> getListaRecetas() {
 		return listaRecetas;
 	}
@@ -211,6 +235,10 @@ public class VentanaPrincipal extends JFrame{
 	public void setReceta(Receta receta) {
 		this.receta = receta;
 	}
+	
+	public JComboBox<String> getComboCat() {
+		return comboCat;
+	}
 
 	/**
 	 * Limpiará las cajas de texto y modificará los botones según parámetros.
@@ -221,7 +249,7 @@ public class VentanaPrincipal extends JFrame{
 	public void limpiar(boolean limpiarLista, boolean mostrarOtraAcc, boolean habilitarBotones) {
 			
 		tf_receta.setText("");
-		tf_categ.setText("");
+		comboCat.setSelectedIndex(0);
 		ta_ingred.setText("");
 		ta_prepa.setText("");
 		et_foto.setIcon(null);
@@ -266,7 +294,6 @@ public class VentanaPrincipal extends JFrame{
 
 	private JPanel contentPane;
 	private JTextField tf_receta;
-	private JTextField tf_categ;
 	private JTextArea ta_ingred;
 	private JTextArea ta_prepa;
 	private JLabel et_foto;
@@ -274,5 +301,6 @@ public class VentanaPrincipal extends JFrame{
 	private JList<Receta> listaRecetas;
 	private JButton btnAdd, btnBorrar, btnModif, btnBuscar, btnEnviar, btnOtraAcc, btn_Imprimir;
 	private Receta receta;
+	private JComboBox<String> comboCat;
 
 }

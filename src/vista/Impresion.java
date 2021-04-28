@@ -24,12 +24,6 @@ public class Impresion extends JPanel implements Printable{
 		setLayout(null);
 		setSize(600,700);
 		
-		et_nombre = new JLabel();
-		et_nombre.setText(nombre);
-		et_nombre.setFont(new Font("Segoe Script", Font.BOLD, 24));
-		et_nombre.setBounds(10, 48, 389, 34);
-		add(et_nombre);
-		
 		et_foto = new JLabel("");
 		et_foto.setBounds(410, 99, 150, 150);
 		et_foto.setIcon(icon);
@@ -46,8 +40,10 @@ public class Impresion extends JPanel implements Printable{
 		add(et_prepa);
 		
 		ta_ingred = new JTextArea();
+		ta_ingred.setWrapStyleWord(true);
+		ta_ingred.setLineWrap(true);
 		ta_ingred.setText(ingred);
-		ta_ingred.setBounds(410, 295, 211, 358);
+		ta_ingred.setBounds(368, 295, 211, 358);
 		ta_ingred.setEditable(false);
 		add(ta_ingred);
 		
@@ -56,13 +52,22 @@ public class Impresion extends JPanel implements Printable{
 		ta_prepa.setLineWrap(true);
 		ta_prepa.setWrapStyleWord(true);
 		ta_prepa.setEditable(false);
-		ta_prepa.setBounds(10, 128, 374, 525);
+		ta_prepa.setBounds(10, 128, 350, 525);
 		add(ta_prepa);
 		
 		et_categ = new JLabel(cat);
 		et_categ.setFont(new Font("Segoe Script", Font.BOLD, 14));
 		et_categ.setBounds(467, 11, 186, 24);
 		add(et_categ);
+		
+		ta_receta = new JTextArea();
+		ta_receta.setText(nombre);
+		ta_receta.setFont(new Font("Segoe Script", Font.BOLD, 24));
+		ta_receta.setWrapStyleWord(true);
+		ta_receta.setEditable(false);
+		ta_receta.setLineWrap(true);
+		ta_receta.setBounds(10, 36, 654, 52);
+		add(ta_receta);
 
 		setVisible(true);
 	}
@@ -83,10 +88,9 @@ public class Impresion extends JPanel implements Printable{
 			return NO_SUCH_PAGE;
 		}
 	}
-	
-	private JLabel et_nombre;
 	private JLabel et_foto;
 	private JTextArea ta_ingred;
 	private JTextArea ta_prepa;
 	private JLabel et_categ;
+	private JTextArea ta_receta;
 }

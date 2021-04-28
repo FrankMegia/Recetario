@@ -29,7 +29,7 @@ public class ControladorBtnBuscar implements ActionListener{
 		rs = null;
 		
 		receta = ventana.getTf_receta().getText();
-		categ = ventana.getTf_categ().getText();
+		categ = ventana.getComboCat().getSelectedItem().toString();
 		
 		if(receta.equals("") && categ.equals("")) {
 			JOptionPane.showMessageDialog(ventana, "Error: No hay criterios de búsqueda!", "Error: Buscar", JOptionPane.ERROR_MESSAGE);

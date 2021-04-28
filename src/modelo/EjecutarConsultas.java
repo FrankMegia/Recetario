@@ -24,7 +24,7 @@ public class EjecutarConsultas {
 		ResultSet rs = null;
 		try {
 			PreparedStatement ps = conexion.prepareStatement(consulta);
-			ps.setString(1, criterio);
+			ps.setString(1, "%"+criterio+"%");
 			rs = ps.executeQuery();
 			
 		} catch (SQLException e) {

@@ -20,7 +20,7 @@ public class ControladorBtnModificar implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		
 		String nombreRec = ventana.getTf_receta().getText();
-		String categoria = ventana.getTf_categ().getText();
+		String categoria = ventana.getComboCat().getSelectedItem().toString();
 		String ingredientes = ventana.getTa_ingred().getText();
 		String prepa = ventana.getTa_prepa().getText();
 		String ruta = ventana.getRuta().getText();

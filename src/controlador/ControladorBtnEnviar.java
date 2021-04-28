@@ -34,7 +34,7 @@ public class ControladorBtnEnviar implements ActionListener{
 		ventana.limpiar(false, true, true);
 		
 		ventana.getTf_receta().setText(r.getNombre());
-		ventana.getTf_categ().setText(r.getCategoria());
+		ventana.getComboCat().setSelectedItem(r.getCategoria());
 		ventana.getTa_ingred().setText(r.getIngredientes());
 		ventana.getTa_prepa().setText(r.getPreparacion());
 		
